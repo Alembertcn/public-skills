@@ -54,6 +54,7 @@ description: >-
 
 **Endpoint**（见 `meta.yaml`）：
 
+- `POST {endpoint}/api/license/resolve` — **统一配置查询**（套餐/天数/绑定类型等）
 - `POST {endpoint}/api/license/activate`
 - `POST {endpoint}/api/license/check`
 
@@ -64,12 +65,14 @@ description: >-
 ## 3. 集成流程
 
 ```
-- [ ] 1. 拿到 activation_key（LIC-...）及 binding_type
-- [ ] 2. 选定 binding_target
-- [ ] 3. activate，持久化 license_id + ack + binding_target
+- [ ] 1. SDK 配置 productId（后台「产品 ID」）
+- [ ] 2. 用户输入 activation_key 后先 resolve，按 binding_type 构造 binding_target
+- [ ] 3. activate，持久化 product_id + ack + binding_target
 - [ ] 4. 定时 check（5–15 分钟）+ 离线宽限
 - [ ] 5. 无授权则限制功能或引导输入激活码
 ```
+
+新增发码字段时只扩展 **resolve 响应**，勿再加单独查询接口。
 
 ### activate 成功（Mode C）
 
@@ -95,20 +98,18 @@ description: >-
 ```java
 LicenseClient client = LicenseClient.builder()
     .endpoint("https://license.ailuo.fun/license-service")
-    .planCode("...")  // 与码内套餐一致，或裸 HTTP 省略 plan_code
-    .bindingTarget(BindingTarget.device(deviceId))
+    .productId("lic-xxx")
     .build();
-client.activate("LIC-....");
+client.activateSmart("LIC-....", accountIdOrNull);
 client.check();
 ```
 
 ```ts
 const client = new LicenseClient({
   endpoint: 'https://license.ailuo.fun/license-service',
-  planCode: '...',
-  bindingTarget: BindingTarget.device(deviceId),
+  productId: 'lic-xxx',
 });
-await client.activate('LIC-....');
+await client.activateSmart('LIC-....', userId ?? undefined);
 ```
 
 ---
