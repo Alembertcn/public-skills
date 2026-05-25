@@ -47,7 +47,7 @@ public-skills/
 ## 安装（Cursor）
 
 ```bash
-git clone https://github.com/<your-org>/public-skills.git
+git clone https://github.com/Alembertcn/public-skills.git
 cd public-skills
 ./scripts/install.sh                  # 全部
 ./scripts/install.sh license-service  # 指定 id

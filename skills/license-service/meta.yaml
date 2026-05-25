@@ -5,7 +5,7 @@ version: "1.0.0"
 tags: [license, activation, sdk, api, ed25519]
 public_api: true
 default_endpoint: https://license.ailuo.fun/license-service
-docs_url: https://github.com/your-org/public-skills/tree/main/skills/license-service
+docs_url: https://github.com/Alembertcn/public-skills/tree/main/skills/license-service
 sdk:
   java: 向发码方索取 sdk-java
   npm: 向发码方索取 sdk-js
