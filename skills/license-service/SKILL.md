@@ -28,7 +28,7 @@ description: >-
   └─ 套餐：功能档位 + 扩展策略（写入 token）
   └─ 激活码 LIC-...
         ├─ binding_type   DEVICE / ACCOUNT / MIXED（生成时设定）
-        ├─ plan_code      内嵌套餐，客户端通常可省略 plan_code
+        ├─ plan_code      发码时可选绑定；绑定后档位随码固定，接入方不可指定
         ├─ days           激活后有效期（0=永久）
         └─ max_transfers  仅 DEVICE/MIXED；ACCOUNT 一码一账号
 
@@ -52,7 +52,14 @@ description: >-
 | JS/TS SDK | 向发码方索取 `sdk-js` |
 | 裸 HTTP | 任意语言，见 [examples.md](examples.md) |
 
-**Endpoint**（见 `meta.yaml`）：
+**Endpoint**（默认值见 [meta.yaml](meta.yaml) 的 `default_endpoint`）：
+
+| 配置项 | 默认值 | 说明 |
+|--------|--------|------|
+| SDK `endpoint` | `https://license.ailuo.fun/license-service` | 含 context-path，**无**末尾 `/` |
+| 环境变量 `LICENSE_ENDPOINT` | 同上 | SDK demo 读取；未设则用本地 `http://127.0.0.1:8090/license-service` |
+
+接口路径（相对 `endpoint`）：
 
 - `POST {endpoint}/api/license/resolve` — **统一配置查询**（套餐/天数/绑定类型等）
 - `POST {endpoint}/api/license/activate`
@@ -66,8 +73,8 @@ description: >-
 
 ```
 - [ ] 1. SDK 配置 productId（后台「产品 ID」）
-- [ ] 2. 用户输入 activation_key 后先 resolve，按 binding_type 构造 binding_target
-- [ ] 3. activate，持久化 product_id + ack + binding_target
+- [ ] 2. 用户输入 activation_key → resolve 查看码内套餐/绑定类型 → 构造 binding_target
+- [ ] 3. activate（**勿传 plan_code**，套餐以激活码为准）
 - [ ] 4. 定时 check（5–15 分钟）+ 离线宽限
 - [ ] 5. 无授权则限制功能或引导输入激活码
 ```
