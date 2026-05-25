@@ -1,7 +1,7 @@
 id: _template
-name: 新服务集成（模板）
+name: 新 Skill（模板）
+category: guide
 version: "0.0.0"
 tags: [template]
-public_api: true
-default_endpoint: https://api.example.com
-maintainer: your-team
+public_api: false
+maintainer: ailuo

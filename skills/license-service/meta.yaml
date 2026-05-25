@@ -1,11 +1,12 @@
 id: license-service
 name: License Service 客户端集成
+category: integration
 version: "1.0.0"
 tags: [license, activation, sdk, api, ed25519]
 public_api: true
 default_endpoint: https://license.ailuo.fun/license-service
-docs_url: https://github.com/your-org/integration-skills/tree/main/skills/license-service
+docs_url: https://github.com/your-org/public-skills/tree/main/skills/license-service
 sdk:
-  java: 向发码方索取 sdk-java 或 Maven 坐标
-  npm: 向发码方索取 sdk-js 或 npm 包名
+  java: 向发码方索取 sdk-java
+  npm: 向发码方索取 sdk-js
 maintainer: ailuo

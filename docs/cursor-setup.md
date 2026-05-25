@@ -1,64 +1,38 @@
-# Cursor 中使用 integration-skills
+# 在 Cursor 中使用 public-skills
 
-## 方式一：用户级（推荐）
+本仓库是**个人对外公开的 Skills 合集**（含 integration、guide 等）。安装方式相同。
 
-所有项目自动可用：
-
-```bash
-git clone https://github.com/<your-org>/integration-skills.git
-cd integration-skills
-./scripts/install.sh              # 安装全部
-./scripts/install.sh license-service   # 只装一个
-```
-
-安装目标：`~/.cursor/skills/<skill-id>/`
-
-重启 Cursor 或新开 Agent 会话后，Agent 会根据 skill 的 `description` 自动匹配。
-
-## 方式二：项目级
-
-仅当前仓库可用，适合团队统一版本：
+## 用户级（推荐）
 
 ```bash
-# 在项目根目录
-git submodule add https://github.com/<your-org>/integration-skills.git .cursor/integration-skills
-
-# 按需链接 skill（示例：license-service）
-# Linux/macOS:
-ln -sf ../integration-skills/skills/license-service .cursor/skills/license-service
-
-# Windows（管理员或开发者模式）:
-# mklink /D .cursor\skills\license-service .cursor\integration-skills\skills\license-service
+git clone https://github.com/<your-org>/public-skills.git
+cd public-skills
+./scripts/install.sh
+./scripts/install.sh license-service
 ```
 
-`.gitignore` 若忽略 `.cursor/*`，需保留：
+目标目录：`~/.cursor/skills/<skill-id>/`
 
-```gitignore
-.cursor/*
-!.cursor/skills/
-!.cursor/skills/**
+Windows:
+
+```powershell
+.\scripts\install.ps1
+.\scripts\install.ps1 -Skill license-service
 ```
 
-## 方式三：手动复制
+## 项目级（子模块）
 
-复制 `skills/<id>/` 整个目录到：
-
-- 用户级：`~/.cursor/skills/<id>/`
-- 项目级：`<project>/.cursor/skills/<id>/`
+```bash
+git submodule add https://github.com/<your-org>/public-skills.git .cursor/public-skills
+ln -sf ../public-skills/skills/license-service .cursor/skills/license-service
+```
 
 ## 验证
 
-在 Cursor Agent 中提问：
-
-> 帮我集成 license 激活码，endpoint 是 https://license.ailuo.fun/license-service
-
-Agent 应加载 `license-service-integrate` skill 并给出 activate/check 流程。
+向 Agent 提问与某 skill 的 `description` 相关的问题，确认其加载对应 SKILL.md。
 
 ## 更新
 
 ```bash
-cd integration-skills && git pull
-./scripts/install.sh   # 覆盖安装到 ~/.cursor/skills
+git pull && ./scripts/install.sh
 ```
-
-子模块方式：`git submodule update --remote`

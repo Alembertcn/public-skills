@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 安装 skills 到 ~/.cursor/skills/
+# 安装 public-skills 到 ~/.cursor/skills/
 # 用法：
 #   ./scripts/install.sh                 # 安装全部（跳过 _template）
 #   ./scripts/install.sh license-service # 只安装指定 id

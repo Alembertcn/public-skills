@@ -1,8 +1,10 @@
-# integration-skills 索引 — 新增 skill 后在此登记
+# public-skills 索引
+description: 个人对外公开的 Cursor Agent Skills 合集（含 integration、guide 等）
 version: 1
 skills:
   - id: license-service
     name: License Service 客户端集成
+    category: integration
     path: skills/license-service
     version: "1.0.0"
     tags: [license, activation, sdk, api]
