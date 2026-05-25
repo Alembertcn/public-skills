@@ -1,0 +1,11 @@
+# integration-skills 索引 — 新增 skill 后在此登记
+version: 1
+skills:
+  - id: license-service
+    name: License Service 客户端集成
+    path: skills/license-service
+    version: "1.0.0"
+    tags: [license, activation, sdk, api]
+    public_api: true
+    default_endpoint: https://license.ailuo.fun/license-service
+    description: 激活码 activate/check、设备与账号绑定、Java/JS SDK 与裸 HTTP
